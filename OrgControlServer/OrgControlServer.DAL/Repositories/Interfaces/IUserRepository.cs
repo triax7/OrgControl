@@ -6,7 +6,7 @@ using OrgControlServer.DAL.Models;
 
 namespace OrgControlServer.DAL.Repositories.Interfaces
 {
-    interface IUserRepository : IBaseRepository<User>
+    public interface IUserRepository : IBaseRepository<User>
     {
     }
 }

@@ -10,7 +10,11 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using Microsoft.IdentityModel.Tokens;
+using OrgControlServer.BLL.Services.Auth;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace OrgControlServer.API
 {
@@ -28,6 +32,53 @@ namespace OrgControlServer.API
         {
 
             services.AddControllers();
+
+            var jwtSection = Configuration.GetSection("JwtOptions");
+            services.Configure<JwtOptions>(jwtSection);
+
+            var jwtOptions = jwtSection.Get<JwtOptions>();
+            var key = Encoding.ASCII.GetBytes(jwtOptions.SecretKey);
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.RequireHttpsMetadata = false;
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidIssuer = jwtOptions.Issuer,
+                        ValidateAudience = true,
+                        ValidAudience = jwtOptions.Audience,
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(key),
+                        ValidateLifetime = true,
+                        ClockSkew = TimeSpan.Zero
+                    };
+                    options.Events = new JwtBearerEvents
+                    {
+                        OnMessageReceived = context =>
+                        {
+                            if (context.Request.Cookies.ContainsKey("access-token"))
+                            {
+                                context.Token = context.Request.Cookies["access-token"];
+                            }
+
+                            return Task.CompletedTask;
+                        }
+                    };
+                });
+
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:3000")
+                            .AllowAnyMethod()
+                            .AllowAnyHeader()
+                            .AllowCredentials();
+                    });
+            });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "OrgControlServer.API", Version = "v1" });

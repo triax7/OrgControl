@@ -2,7 +2,7 @@
 
 namespace OrgControlServer.DAL.Repositories
 {
-    internal interface IUnitOfWork
+    public interface IUnitOfWork
     {
         IUserRepository Users { get; }
         IRefreshTokenRepository RefreshTokens { get; }
