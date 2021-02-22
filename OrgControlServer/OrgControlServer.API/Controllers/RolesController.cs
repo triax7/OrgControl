@@ -42,11 +42,21 @@ namespace OrgControlServer.API.Controllers
         }
 
         [HttpGet("GetFromEvent/{eventId}")]
-        public ActionResult<IEnumerable<RoleViewModel>> GetRoles([FromRoute] string eventId)
+        public ActionResult<IEnumerable<RoleViewModel>> GetRolesFromEvent([FromRoute] string eventId)
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type.Equals(ClaimTypes.NameIdentifier))?.Value;
 
             return Ok(_mapper.Map<IEnumerable<RoleViewModel>>(_roleService.GetRolesFromEvent(eventId, userId)));
+        }
+
+        [HttpGet("GetFromUserInEvent")]
+        public ActionResult<IEnumerable<RoleViewModel>> GetRolesFromUserInEvent(
+            [FromBody] GetRolesFromUserInEventViewModel model)
+        {
+            var userId = User.Claims.FirstOrDefault(c => c.Type.Equals(ClaimTypes.NameIdentifier))?.Value;
+
+            return Ok(_mapper.Map<IEnumerable<RoleViewModel>>(
+                _roleService.GetUserRolesInEvent(model.UserId, model.EventId, userId)));
         }
 
         [HttpDelete("Delete/{id}")]
@@ -55,6 +65,16 @@ namespace OrgControlServer.API.Controllers
             var userId = User.Claims.FirstOrDefault(c => c.Type.Equals(ClaimTypes.NameIdentifier))?.Value;
 
             _roleService.DeleteRole(id, userId);
+
+            return Ok();
+        }
+
+        [HttpPost("Assign")]
+        public ActionResult AssignRoleToUser([FromBody] AssignRoleToUserViewModel model)
+        {
+            var userId = User.Claims.FirstOrDefault(c => c.Type.Equals(ClaimTypes.NameIdentifier))?.Value;
+
+            _roleService.AssignRoleToUser(model.RoleId, model.UserId, userId);
 
             return Ok();
         }

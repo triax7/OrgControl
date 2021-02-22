@@ -22,7 +22,8 @@ namespace OrgControlServer.API
             CreateMap<RegisterViewModel, RegisterDTO>();
             CreateMap<LoginViewModel, LoginDTO>();
             CreateMap<UserDTO, UserViewModel>();
-            
+            CreateMap<User, UserDTO>();
+
             CreateMap<EventDTO, EventViewModel>();
             CreateMap<Event, EventDTO>();
 

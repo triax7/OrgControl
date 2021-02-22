@@ -23,11 +23,11 @@ namespace OrgControlServer.BLL.Services.Roles
             _mapper = mapper;
         }
 
-        public RoleDTO CreateRole(RoleCreateDTO dto, string userId)
+        public RoleDTO CreateRole(RoleCreateDTO dto, string currentUserId)
         {
             var myEvent = _unitOfWork.Events.GetById(dto.EventId);
 
-            if (myEvent == null || myEvent.User.Id != userId)
+            if (myEvent == null || myEvent.User.Id != currentUserId)
                 throw new AppException("Event does not belong to you or does not exist", HttpStatusCode.Forbidden);
 
             var role = _mapper.Map<Role>(dto);
@@ -38,24 +38,45 @@ namespace OrgControlServer.BLL.Services.Roles
             return new RoleDTO(role.Id, role.Name);
         }
 
-        public IEnumerable<RoleDTO> GetRolesFromEvent(string eventId, string userId)
+        public IEnumerable<RoleDTO> GetRolesFromEvent(string eventId, string currentUserId)
         {
             var myEvent = _unitOfWork.Events.GetById(eventId);
 
-            if (myEvent == null || myEvent.User.Id != userId)
+            if (myEvent == null || myEvent.User.Id != currentUserId)
                 throw new AppException("Event does not belong to you or does not exist", HttpStatusCode.Forbidden);
 
             return _mapper.Map<IEnumerable<RoleDTO>>(myEvent.Roles);
         }
 
-        public void DeleteRole(string roleId, string userId)
+        public void DeleteRole(string roleId, string currentUserId)
         {
             var role = _unitOfWork.Roles.GetById(roleId);
             
-            if (role == null || role.Event.UserId != userId)
+            if (role == null || role.Event.UserId != currentUserId)
                 throw new AppException("Role does not belong to you or does not exist", HttpStatusCode.Forbidden);
             
             _unitOfWork.Roles.Delete(role);
+        }
+
+        public void AssignRoleToUser(string roleId, string userToAssignId, string currentUserId)
+        {
+            var role = _unitOfWork.Roles.GetById(roleId);
+
+            if (role == null || role.Event.UserId != currentUserId)
+                throw new AppException("Role does not belong to you or does not exist", HttpStatusCode.Forbidden);
+            
+            role.Users.Add(new User {Id = userToAssignId});
+            _unitOfWork.Commit();
+        }
+
+        public IEnumerable<RoleDTO> GetUserRolesInEvent(string userId, string eventId, string currentUserId)
+        {
+            var user = _unitOfWork.Users.GetById(userId);
+
+            if (user == null)
+                throw new AppException("User not found", HttpStatusCode.NotFound);
+
+            return _mapper.Map<IEnumerable<RoleDTO>>(user.Roles.Where(r => r.EventId == eventId));
         }
     }
 }

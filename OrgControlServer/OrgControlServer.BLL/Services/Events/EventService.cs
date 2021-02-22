@@ -23,12 +23,12 @@ namespace OrgControlServer.BLL.Services.Events
             _mapper = mapper;
         }
 
-        public EventDTO CreateEvent(string name, string userId)
+        public EventDTO CreateEvent(string name, string currentUserId)
         {
             if (_unitOfWork.Events.SingleOrDefault(e => e.Name == name) != null)
                 throw new AppException("Event with such name already exists");
 
-            var myEvent = new Event {Name = name, UserId = userId};
+            var myEvent = new Event {Name = name, UserId = currentUserId};
 
             _unitOfWork.Events.Add(myEvent);
             _unitOfWork.Commit();
@@ -36,19 +36,19 @@ namespace OrgControlServer.BLL.Services.Events
             return new EventDTO(myEvent.Id, myEvent.Name);
         }
 
-        public void DeleteEvent(string eventId, string userId)
+        public void DeleteEvent(string eventId, string currentUserId)
         {
             var myEvent = _unitOfWork.Events.GetById(eventId);
             
-            if (myEvent == null || myEvent.UserId != userId)
+            if (myEvent == null || myEvent.UserId != currentUserId)
                 throw new AppException("Event does not belong to you or does not exist", HttpStatusCode.Forbidden);
             
             _unitOfWork.Events.Delete(myEvent);
         }
 
-        public IEnumerable<EventDTO> GetEventsFromUser(string userId)
+        public IEnumerable<EventDTO> GetEventsFromUser(string currentUserId)
         {
-            return _mapper.Map<IEnumerable<EventDTO>>(_unitOfWork.Users.GetById(userId).Events);
+            return _mapper.Map<IEnumerable<EventDTO>>(_unitOfWork.Users.GetById(currentUserId).Events);
         }
     }
 }

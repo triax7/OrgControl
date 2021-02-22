@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using OrgControlServer.BLL.Services.Auth;
 using OrgControlServer.BLL.Services.Events;
 using OrgControlServer.BLL.Services.Roles;
+using OrgControlServer.BLL.Services.Users;
 
 namespace OrgControlServer.BLL
 {
@@ -18,6 +19,7 @@ namespace OrgControlServer.BLL
             services.AddTransient<TokenService>();
             services.AddTransient<EventService>();
             services.AddTransient<RoleService>();
+            services.AddTransient<UserService>();
 
             return services;
         }
