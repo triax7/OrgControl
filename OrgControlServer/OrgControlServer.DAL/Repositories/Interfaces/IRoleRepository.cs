@@ -6,7 +6,7 @@ using OrgControlServer.DAL.Models;
 
 namespace OrgControlServer.DAL.Repositories.Interfaces
 {
-    interface IRoleRepository : IBaseRepository<Role>
+    public interface IRoleRepository : IBaseRepository<Role>
     {
     }
 }

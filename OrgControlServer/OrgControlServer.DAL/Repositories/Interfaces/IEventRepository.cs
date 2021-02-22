@@ -8,7 +8,7 @@ using OrgControlServer.DAL.Models;
 
 namespace OrgControlServer.DAL.Repositories.Interfaces
 {
-    interface IEventRepository : IBaseRepository<Event>
+    public interface IEventRepository : IBaseRepository<Event>
     {
     }
 }

@@ -10,13 +10,22 @@ namespace OrgControlServer.DAL.Repositories
         private readonly ApplicationContext _context;
         public IUserRepository Users { get; }
         public IRefreshTokenRepository RefreshTokens { get; }
+        public IEventRepository Events { get; }
+        public IRoleRepository Roles { get; }
+        public IAssignmentRepository Assignments { get; }
+        public IZoneRepository Zones { get; }
 
         public UnitOfWork(ApplicationContext context, IUserRepository userRepository,
-            IRefreshTokenRepository refreshTokenRepository)
+            IRefreshTokenRepository refreshTokenRepository, IEventRepository eventRepository, IRoleRepository roleRepository,
+            IAssignmentRepository assignmentRepository, IZoneRepository zoneRepository)
         {
             _context = context;
             Users = userRepository;
             RefreshTokens = refreshTokenRepository;
+            Events = eventRepository;
+            Roles = roleRepository;
+            Assignments = assignmentRepository;
+            Zones = zoneRepository;
         }
 
         public int Commit()

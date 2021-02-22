@@ -6,7 +6,7 @@ using OrgControlServer.DAL.Models;
 
 namespace OrgControlServer.DAL.Repositories.Interfaces
 {
-    interface IZoneRepository : IBaseRepository<Zone>
+    public interface IZoneRepository : IBaseRepository<Zone>
     {
     }
 }

@@ -22,7 +22,7 @@ namespace OrgControlServer.BLL.Services.Auth
             _unitOfWork = unitOfWork;
             _tokenService = tokenService;
         }
-        public UserDTO Register(RegisterDTO dto)
+        public UserDTO RegisterUser(RegisterDTO dto)
         {
             if (_unitOfWork.Users.GetAll(u => u.Email == dto.Email).SingleOrDefault() != null)
                 throw new AppException("User already exists");
@@ -46,7 +46,7 @@ namespace OrgControlServer.BLL.Services.Auth
             return new UserDTO(user.Id, user.Name, user.Email, accessToken, refreshToken);
         }
 
-        public UserDTO Login(LoginDTO dto)
+        public UserDTO LoginUser(LoginDTO dto)
         {
             var user = _unitOfWork.Users.GetAll().SingleOrDefault(u => u.Email == dto.Email);
 

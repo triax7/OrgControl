@@ -10,6 +10,7 @@ namespace OrgControlServer.DAL.Abstractions
     {
         void Add(T item);
         void Delete(T item);
+        void DeleteById(string id);
         IQueryable<T> GetAll();
         IQueryable<T> GetAll(Expression<Func<T, bool>> predicate);
         T GetById(string id);

@@ -10,7 +10,8 @@ namespace OrgControlServer.DAL.Models
         public string Name { get; set; }
         public string Email { get; set; }
         public string PasswordHash { get; set; }
-        public ICollection<RefreshToken> RefreshTokens { get; set; }
-        public ICollection<Role> Roles { get; set; }
+        public virtual ICollection<Event> Events { get; set; }
+        public virtual ICollection<RefreshToken> RefreshTokens { get; set; }
+        public virtual ICollection<Role> Roles { get; set; }
     }
 }

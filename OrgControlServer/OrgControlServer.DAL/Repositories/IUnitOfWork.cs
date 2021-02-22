@@ -6,6 +6,10 @@ namespace OrgControlServer.DAL.Repositories
     {
         IUserRepository Users { get; }
         IRefreshTokenRepository RefreshTokens { get; }
+        IEventRepository Events { get; }
+        IRoleRepository Roles { get; }
+        IAssignmentRepository Assignments { get; }
+        IZoneRepository Zones { get; }
         int Commit();
     }
 }

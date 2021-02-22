@@ -6,7 +6,7 @@ using OrgControlServer.DAL.Models;
 
 namespace OrgControlServer.DAL.Repositories.Interfaces
 {
-    interface IAssignmentRepository : IBaseRepository<Assignment>
+    public interface IAssignmentRepository : IBaseRepository<Assignment>
     {
     }
 }

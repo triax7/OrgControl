@@ -32,7 +32,7 @@ namespace OrgControlServer.API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var user = _userAccountsService.Register(_mapper.Map<RegisterDTO>(model));
+            var user = _userAccountsService.RegisterUser(_mapper.Map<RegisterDTO>(model));
             SetTokenCookies(user.AccessToken, user.RefreshToken);
 
             return Ok(_mapper.Map<UserViewModel>(user));
@@ -44,7 +44,7 @@ namespace OrgControlServer.API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var user = _userAccountsService.Login(_mapper.Map<LoginDTO>(model));
+            var user = _userAccountsService.LoginUser(_mapper.Map<LoginDTO>(model));
             SetTokenCookies(user.AccessToken, user.RefreshToken);
 
             return Ok(_mapper.Map<UserViewModel>(user));

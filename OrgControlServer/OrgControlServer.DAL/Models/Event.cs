@@ -10,8 +10,10 @@ namespace OrgControlServer.DAL.Models
     public class Event : BaseEntity
     {
         public string Name { get; set; }
-        public ICollection<Role> Roles { get; set; }
-        public ICollection<Assignment> Assignments { get; set; }
-        public ICollection<Zone> Zones { get; set; }
+        public string UserId { get; set; }
+        public virtual User User { get; set; }
+        public virtual ICollection<Role> Roles { get; set; }
+        public virtual ICollection<Assignment> Assignments { get; set; }
+        public virtual ICollection<Zone> Zones { get; set; }
     }
 }

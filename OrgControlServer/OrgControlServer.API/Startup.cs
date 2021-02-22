@@ -35,11 +35,10 @@ namespace OrgControlServer.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
 
             services.AddDbContext<ApplicationContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             var mapperConfig = new MapperConfiguration(mc => { mc.AddProfile(new MappingProfile()); });
             IMapper mapper = mapperConfig.CreateMapper();
@@ -96,7 +95,7 @@ namespace OrgControlServer.API
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "OrgControlServer.API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo {Title = "OrgControlServer.API", Version = "v1"});
             });
         }
 
@@ -116,13 +115,10 @@ namespace OrgControlServer.API
 
             app.UseAuthentication();
             app.UseAuthorization();
-            
+
             app.UseMiddleware<ErrorHandlerMiddleware>();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }

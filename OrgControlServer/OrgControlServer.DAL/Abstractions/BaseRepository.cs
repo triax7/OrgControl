@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
 
 namespace OrgControlServer.DAL.Abstractions
 {
@@ -23,6 +24,11 @@ namespace OrgControlServer.DAL.Abstractions
         public void Delete(T item)
         {
             _context.Remove(item);
+        }
+
+        public void DeleteById(string id)
+        {
+            _context.Remove(GetById(id));
         }
 
         public virtual IQueryable<T> GetAll()
