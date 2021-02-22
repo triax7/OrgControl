@@ -13,5 +13,6 @@ namespace OrgControlServer.DAL.Models
         public ICollection<User> Users { get; set; }
         public ICollection<Assignment> AllowedAssignments { get; set; }
         public ICollection<Zone> AllowedZones { get; set; }
+        public Event Event { get; set; }
     }
 }

@@ -19,6 +19,7 @@ namespace OrgControlServer.DAL
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IAssignmentRepository, AssignmentRepository>();
             services.AddScoped<IZoneRepository, ZoneRepository>();
+            services.AddScoped<IEventRepository, EventRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 

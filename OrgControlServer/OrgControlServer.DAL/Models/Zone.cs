@@ -9,5 +9,6 @@ namespace OrgControlServer.DAL.Models
     {
         public string Name { get; set; }
         public ICollection<Role> AllowedRoles { get; set; }
+        public Event Event { get; set; }
     }
 }

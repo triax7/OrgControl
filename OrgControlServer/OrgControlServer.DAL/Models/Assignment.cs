@@ -11,6 +11,7 @@ namespace OrgControlServer.DAL.Models
         public string Description { get; set; }
         public AssignmentStatus Status { get; set; }
         public ICollection<Role> AllowedRoles { get; set; }
+        public Event Event { get; set; }
     }
 
     public enum AssignmentStatus

@@ -29,5 +29,6 @@ namespace OrgControlServer.DAL
         public DbSet<Role> Roles { get; set; }
         public DbSet<Assignment> Assignments { get; set; }
         public DbSet<Zone> Zones { get; set; }
+        public DbSet<Event> Events { get; set; }
     }
 }
