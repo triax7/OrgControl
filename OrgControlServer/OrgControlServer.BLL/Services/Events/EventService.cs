@@ -36,12 +36,14 @@ namespace OrgControlServer.BLL.Services.Events
             return new EventDTO(myEvent.Id, myEvent.Name);
         }
 
-        public void DeleteEvent(string id, string userId)
+        public void DeleteEvent(string eventId, string userId)
         {
-            if (_unitOfWork.Events.GetById(id) == null || _unitOfWork.Events.GetById(id).User.Id != userId)
+            var myEvent = _unitOfWork.Events.GetById(eventId);
+            
+            if (myEvent == null || myEvent.UserId != userId)
                 throw new AppException("Event does not belong to you or does not exist", HttpStatusCode.Forbidden);
             
-            _unitOfWork.Events.DeleteById(id);
+            _unitOfWork.Events.Delete(myEvent);
         }
 
         public IEnumerable<EventDTO> GetEventsFromUser(string userId)

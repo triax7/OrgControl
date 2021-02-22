@@ -47,7 +47,15 @@ namespace OrgControlServer.BLL.Services.Roles
 
             return _mapper.Map<IEnumerable<RoleDTO>>(myEvent.Roles);
         }
-        
-        //TODO: add delete
+
+        public void DeleteRole(string roleId, string userId)
+        {
+            var role = _unitOfWork.Roles.GetById(roleId);
+            
+            if (role == null || role.Event.UserId != userId)
+                throw new AppException("Role does not belong to you or does not exist", HttpStatusCode.Forbidden);
+            
+            _unitOfWork.Roles.Delete(role);
+        }
     }
 }
