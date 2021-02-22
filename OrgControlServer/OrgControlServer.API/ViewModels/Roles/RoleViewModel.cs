@@ -9,5 +9,6 @@ namespace OrgControlServer.API.ViewModels.Roles
     {
         public string Id { get; set; }
         public string Name { get; set; }
+        public bool CanCreateAssignments { get; set; }
     }
 }
