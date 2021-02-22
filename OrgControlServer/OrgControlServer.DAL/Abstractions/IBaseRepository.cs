@@ -13,5 +13,6 @@ namespace OrgControlServer.DAL.Abstractions
         IQueryable<T> GetAll();
         IQueryable<T> GetAll(Expression<Func<T, bool>> predicate);
         T GetById(string id);
+        T SingleOrDefault(Expression<Func<T, bool>> predicate);
     }
 }

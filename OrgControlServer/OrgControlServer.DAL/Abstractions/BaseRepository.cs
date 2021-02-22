@@ -39,5 +39,10 @@ namespace OrgControlServer.DAL.Abstractions
         {
             return _context.Set<T>().SingleOrDefault(entity => entity.Id == id);
         }
+
+        public T SingleOrDefault(Expression<Func<T, bool>> predicate)
+        {
+            return _context.Set<T>().SingleOrDefault(predicate);
+        }
     }
 }

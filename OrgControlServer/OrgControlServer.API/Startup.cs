@@ -12,9 +12,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.IdentityModel.Tokens;
 using OrgControlServer.BLL.Services.Auth;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using OrgControlServer.BLL;
+using OrgControlServer.DAL;
+using Microsoft.EntityFrameworkCore;
+using OrgControlServer.API.Middleware;
 
 namespace OrgControlServer.API
 {
@@ -32,6 +37,13 @@ namespace OrgControlServer.API
         {
 
             services.AddControllers();
+
+            services.AddDbContext<ApplicationContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            var mapperConfig = new MapperConfiguration(mc => { mc.AddProfile(new MappingProfile()); });
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
 
             var jwtSection = Configuration.GetSection("JwtOptions");
             services.Configure<JwtOptions>(jwtSection);
@@ -79,6 +91,9 @@ namespace OrgControlServer.API
                     });
             });
 
+            services.AddRepositories();
+            services.AddBLLServices();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "OrgControlServer.API", Version = "v1" });
@@ -99,7 +114,10 @@ namespace OrgControlServer.API
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
+            
+            app.UseMiddleware<ErrorHandlerMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

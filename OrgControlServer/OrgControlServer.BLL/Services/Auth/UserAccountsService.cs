@@ -75,7 +75,7 @@ namespace OrgControlServer.BLL.Services.Auth
             return true;
         }
 
-        public Task<UserDTO> UpdateAccessToken(string requestAccessToken, string requestRefreshToken)
+        public UserDTO UpdateAccessToken(string requestAccessToken, string requestRefreshToken)
         {
             var accessToken = new JwtSecurityTokenHandler().ReadToken(requestAccessToken) as JwtSecurityToken;
             if (accessToken == null)
@@ -97,7 +97,18 @@ namespace OrgControlServer.BLL.Services.Auth
 
             _unitOfWork.Commit();
 
-            return Task.FromResult(new UserDTO(user.Id, user.Name, user.Email, newAccessToken, newRefreshToken));
+            return new UserDTO(user.Id, user.Name, user.Email, newAccessToken, newRefreshToken);
+        }
+
+        public bool EmailExists(string email)
+        {
+            return _unitOfWork.Users.SingleOrDefault(u => u.Email == email) != null;
+        }
+
+        public UserDTO GetUserById(string id)
+        {
+            var user = _unitOfWork.Users.GetById(id);
+            return new UserDTO(user.Id, user.Name, user.Email);
         }
     }
 }
