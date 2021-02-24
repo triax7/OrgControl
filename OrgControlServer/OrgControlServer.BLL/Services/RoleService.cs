@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using AutoMapper;
 using OrgControlServer.BLL.DTOs.Roles;
 using OrgControlServer.BLL.Exceptions;
 using OrgControlServer.DAL.Models;
 using OrgControlServer.DAL.Repositories;
 
-namespace OrgControlServer.BLL.Services.Roles
+namespace OrgControlServer.BLL.Services
 {
     public class RoleService
     {

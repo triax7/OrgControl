@@ -14,12 +14,12 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.IdentityModel.Tokens;
-using OrgControlServer.BLL.Services.Auth;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using OrgControlServer.BLL;
 using OrgControlServer.DAL;
 using Microsoft.EntityFrameworkCore;
 using OrgControlServer.API.Middleware;
+using OrgControlServer.BLL.Services;
 
 namespace OrgControlServer.API
 {

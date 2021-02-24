@@ -4,10 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
-using OrgControlServer.BLL.Services.Auth;
-using OrgControlServer.BLL.Services.Events;
-using OrgControlServer.BLL.Services.Roles;
-using OrgControlServer.BLL.Services.Users;
+using OrgControlServer.BLL.Services;
 
 namespace OrgControlServer.BLL
 {

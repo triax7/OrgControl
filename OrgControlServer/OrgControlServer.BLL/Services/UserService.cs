@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using AutoMapper;
 using OrgControlServer.BLL.DTOs.Auth;
-using OrgControlServer.DAL.Models;
 using OrgControlServer.DAL.Repositories;
 
-namespace OrgControlServer.BLL.Services.Users
+namespace OrgControlServer.BLL.Services
 {
     public class UserService
     {

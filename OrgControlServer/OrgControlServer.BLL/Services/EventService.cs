@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using AutoMapper;
 using OrgControlServer.BLL.DTOs.Events;
 using OrgControlServer.BLL.Exceptions;
 using OrgControlServer.DAL.Models;
 using OrgControlServer.DAL.Repositories;
 
-namespace OrgControlServer.BLL.Services.Events
+namespace OrgControlServer.BLL.Services
 {
     public class EventService
     {
@@ -46,9 +42,9 @@ namespace OrgControlServer.BLL.Services.Events
             _unitOfWork.Events.Delete(myEvent);
         }
 
-        public IEnumerable<EventDTO> GetEventsFromUser(string currentUserId)
+        public IEnumerable<EventDTO> GetEventsFromUser(string userId)
         {
-            return _mapper.Map<IEnumerable<EventDTO>>(_unitOfWork.Users.GetById(currentUserId).Events);
+            return _mapper.Map<IEnumerable<EventDTO>>(_unitOfWork.Users.GetById(userId).Events);
         }
     }
 }

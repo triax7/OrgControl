@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
+﻿using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using OrgControlServer.BLL.DTOs.Auth;
 using OrgControlServer.BLL.Exceptions;
 using OrgControlServer.DAL.Models;
 using OrgControlServer.DAL.Repositories;
 
-namespace OrgControlServer.BLL.Services.Auth
+namespace OrgControlServer.BLL.Services
 {
     public class UserAccountsService
     {

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -8,7 +7,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using OrgControlServer.DAL.Models;
 
-namespace OrgControlServer.BLL.Services.Auth
+namespace OrgControlServer.BLL.Services
 {
     public class TokenService
     {

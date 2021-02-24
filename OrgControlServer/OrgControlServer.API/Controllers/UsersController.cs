@@ -6,8 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using OrgControlServer.API.ViewModels.Auth;
-using OrgControlServer.BLL.Services.Roles;
-using OrgControlServer.BLL.Services.Users;
+using OrgControlServer.BLL.Services;
 
 namespace OrgControlServer.API.Controllers
 {

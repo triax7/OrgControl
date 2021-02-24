@@ -9,7 +9,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using OrgControlServer.API.ViewModels.Auth;
 using OrgControlServer.BLL.DTOs.Auth;
-using OrgControlServer.BLL.Services.Auth;
+using OrgControlServer.BLL.Services;
 
 namespace OrgControlServer.API.Controllers
 {
