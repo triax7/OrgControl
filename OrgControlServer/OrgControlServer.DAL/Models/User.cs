@@ -13,5 +13,6 @@ namespace OrgControlServer.DAL.Models
         public virtual ICollection<Event> Events { get; set; }
         public virtual ICollection<RefreshToken> RefreshTokens { get; set; }
         public virtual ICollection<Role> Roles { get; set; }
+        public virtual ICollection<Assignment> Duties { get; set; }
     }
 }

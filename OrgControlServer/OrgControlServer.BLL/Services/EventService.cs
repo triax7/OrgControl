@@ -39,7 +39,10 @@ namespace OrgControlServer.BLL.Services
             if (myEvent == null || myEvent.UserId != currentUserId)
                 throw new AppException("Event does not belong to you or does not exist", HttpStatusCode.Forbidden);
             
-            _unitOfWork.Events.Delete(myEvent);
+            _unitOfWork.Roles.RemoveRange(_unitOfWork.Roles.GetAll(r => r.EventId == eventId));
+
+            _unitOfWork.Events.Remove(myEvent);
+            _unitOfWork.Commit();
         }
 
         public IEnumerable<EventDTO> GetEventsFromUser(string userId)

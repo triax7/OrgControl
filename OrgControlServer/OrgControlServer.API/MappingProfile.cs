@@ -8,6 +8,7 @@ using AutoMapper;
 using OrgControlServer.API.ViewModels.Auth;
 using OrgControlServer.API.ViewModels.Events;
 using OrgControlServer.API.ViewModels.Roles;
+using OrgControlServer.BLL.DTOs.Assignments;
 using OrgControlServer.BLL.DTOs.Auth;
 using OrgControlServer.BLL.DTOs.Events;
 using OrgControlServer.BLL.DTOs.Roles;
@@ -31,6 +32,9 @@ namespace OrgControlServer.API
             CreateMap<Role, RoleDTO>();
             CreateMap<RoleCreateViewModel, RoleCreateDTO>();
             CreateMap<RoleCreateDTO, Role>();
+
+            CreateMap<AssignmentCreateDTO, Assignment>();
+            CreateMap<Assignment, AssignmentDTO>();
         }
     }
 }

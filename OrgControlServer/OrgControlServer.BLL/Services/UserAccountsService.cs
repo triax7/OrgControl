@@ -64,7 +64,7 @@ namespace OrgControlServer.BLL.Services
             var token = _unitOfWork.RefreshTokens.GetAll().FirstOrDefault(t => t.Token == refreshToken);
             if (token == null) return false;
 
-            _unitOfWork.RefreshTokens.Delete(token);
+            _unitOfWork.RefreshTokens.Remove(token);
 
             _unitOfWork.Commit();
 

@@ -17,6 +17,7 @@ namespace OrgControlServer.BLL
             services.AddTransient<EventService>();
             services.AddTransient<RoleService>();
             services.AddTransient<UserService>();
+            services.AddTransient<AssignmentService>();
 
             return services;
         }

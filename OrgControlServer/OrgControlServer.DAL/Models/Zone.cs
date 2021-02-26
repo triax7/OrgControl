@@ -9,6 +9,7 @@ namespace OrgControlServer.DAL.Models
     {
         public string Name { get; set; }
         public virtual ICollection<Role> AllowedRoles { get; set; }
+        public string EventId { get; set; }
         public virtual Event Event { get; set; }
     }
 }

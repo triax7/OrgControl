@@ -9,8 +9,9 @@ namespace OrgControlServer.DAL.Abstractions
     public interface IBaseRepository<T> where T : BaseEntity
     {
         void Add(T item);
-        void Delete(T item);
-        void DeleteById(string id);
+        void Remove(T item);
+        void RemoveById(string id);
+        void RemoveRange(IEnumerable<T> items);
         IQueryable<T> GetAll();
         IQueryable<T> GetAll(Expression<Func<T, bool>> predicate);
         T GetById(string id);

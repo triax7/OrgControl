@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OrgControlServer.DAL;
 
 namespace OrgControlServer.DAL.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20210225165650_CascadeFromEvent")]
+    partial class CascadeFromEvent
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,14 +55,9 @@ namespace OrgControlServer.DAL.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("EventId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Assignments");
                 });
@@ -220,13 +217,7 @@ namespace OrgControlServer.DAL.Migrations
                         .HasForeignKey("EventId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("OrgControlServer.DAL.Models.User", "User")
-                        .WithMany("Duties")
-                        .HasForeignKey("UserId");
-
                     b.Navigation("Event");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("OrgControlServer.DAL.Models.Event", b =>
@@ -307,8 +298,6 @@ namespace OrgControlServer.DAL.Migrations
 
             modelBuilder.Entity("OrgControlServer.DAL.Models.User", b =>
                 {
-                    b.Navigation("Duties");
-
                     b.Navigation("Events");
 
                     b.Navigation("RefreshTokens");

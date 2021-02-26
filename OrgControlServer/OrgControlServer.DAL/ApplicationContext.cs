@@ -22,6 +22,9 @@ namespace OrgControlServer.DAL
             {
                 property.ValueGenerated = ValueGenerated.OnAdd;
             }
+
+            builder.Entity<Event>().HasMany(e => e.Assignments).WithOne(a => a.Event).OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<Event>().HasMany(e => e.Zones).WithOne(z => z.Event).OnDelete(DeleteBehavior.Cascade);
         }
 
         public DbSet<User> Users { get; set; }

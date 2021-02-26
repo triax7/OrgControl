@@ -21,14 +21,19 @@ namespace OrgControlServer.DAL.Abstractions
             _context.Add(item);
         }
 
-        public void Delete(T item)
+        public void Remove(T item)
         {
             _context.Remove(item);
         }
 
-        public void DeleteById(string id)
+        public void RemoveById(string id)
         {
             _context.Remove(GetById(id));
+        }
+
+        public void RemoveRange(IEnumerable<T> items)
+        {
+            _context.RemoveRange(items);
         }
 
         public virtual IQueryable<T> GetAll()

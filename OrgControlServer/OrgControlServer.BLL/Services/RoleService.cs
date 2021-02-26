@@ -52,7 +52,7 @@ namespace OrgControlServer.BLL.Services
             if (role == null || role.Event.UserId != currentUserId)
                 throw new AppException("Role does not belong to you or does not exist", HttpStatusCode.Forbidden);
             
-            _unitOfWork.Roles.Delete(role);
+            _unitOfWork.Roles.Remove(role);
         }
 
         public void AssignRoleToUser(string roleId, string userToAssignId, string currentUserId)
@@ -62,7 +62,7 @@ namespace OrgControlServer.BLL.Services
             if (role == null || role.Event.UserId != currentUserId)
                 throw new AppException("Role does not belong to you or does not exist", HttpStatusCode.Forbidden);
             
-            role.Users.Add(new User {Id = userToAssignId});
+            role.Users.Add(_unitOfWork.Users.GetById(currentUserId));
             _unitOfWork.Commit();
         }
 
