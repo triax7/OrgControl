@@ -38,5 +38,9 @@ export async function updateAccessToken() {
 }
 
 export async function emailExists(email) {
-  return api.post('exists', {email}).then(res => res.data)
+  return api.post('exists', {email}).then(res => res.data);
+}
+
+export async function logout() {
+  return api.post('logout');
 }
