@@ -13,31 +13,33 @@ export default function Header() {
   const isLoggedIn = useSelector(state => !!state.user.id);
 
   useEffect(() => {
-    dispatch(getCurrentUser())
+    dispatch(getCurrentUser());
   });
 
   function handleLogout() {
-    dispatch(logoutUser())
+    dispatch(logoutUser());
   }
 
   return (
-    <AppBar position={'sticky'} style={{backgroundColor: '#9dc89a'}}>
-      <Box display={'flex'} justifyContent={'center'} alignItems={'center'}>
-        {isLoggedIn ?
-          <Box p={1}>
-            <ButtonGroup>
-              <Button onClick={() => dispatch(push('/events'))}>Events</Button>
-              <Button onClick={() => dispatch(push('/assignments'))}>Assignments</Button>
-              <Button onClick={handleLogout}>Logout</Button>
-            </ButtonGroup>
-          </Box> :
-          <Box p={1}>
-            <ButtonGroup>
-              <Button onClick={() => dispatch(push('/register'))}>Register</Button>
-              <Button onClick={() => dispatch(push('/login'))}>Login</Button>
-            </ButtonGroup>
-          </Box>}
-      </Box>
-    </AppBar>
+    <Box mb={4}>
+      <AppBar position={'sticky'} style={{backgroundColor: '#9dc89a'}}>
+        <Box display={'flex'} justifyContent={'center'} alignItems={'center'}>
+          {isLoggedIn ?
+            <Box p={1}>
+              <ButtonGroup>
+                <Button onClick={() => dispatch(push('/events'))}>Events</Button>
+                <Button onClick={() => dispatch(push('/assignments'))}>Assignments</Button>
+                <Button onClick={handleLogout}>Logout</Button>
+              </ButtonGroup>
+            </Box> :
+            <Box p={1}>
+              <ButtonGroup>
+                <Button onClick={() => dispatch(push('/register'))}>Register</Button>
+                <Button onClick={() => dispatch(push('/login'))}>Login</Button>
+              </ButtonGroup>
+            </Box>}
+        </Box>
+      </AppBar>
+    </Box>
   );
 }

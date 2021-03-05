@@ -11,6 +11,7 @@ export function* handleGetCurrentUser(action) {
     yield put(setUser({...data}));
   } catch (error) {
     console.log(error);
+    yield put(push('/login'))
   }
 }
 
