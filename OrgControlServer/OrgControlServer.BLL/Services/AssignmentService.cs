@@ -35,16 +35,32 @@ namespace OrgControlServer.BLL.Services
             var newAssignment = _mapper.Map<Assignment>(dto);
 
             newAssignment.AllowedRoles = dto.AllowedRoleIds.Select(id => _unitOfWork.Roles.GetById(id)).ToList();
-            
+
             _unitOfWork.Assignments.Add(newAssignment);
+            _unitOfWork.Commit();
 
             return _mapper.Map<AssignmentDTO>(newAssignment);
+        }
+
+        public void AssignDutyToUser(string assignmentId, string userId, string currentUserId)
+        {
+            var assignment = _unitOfWork.Assignments.GetById(assignmentId);
+            var user = _unitOfWork.Users.GetById(userId);
+
+            if (assignment.Status != AssignmentStatus.NotStarted)
+                throw new AppException("Assignment is already in progress or completed.");
+            if (assignment.Event.UserId != currentUserId)
+                throw new AppException("You are not the creator of the event.", HttpStatusCode.Forbidden);
+
+            assignment.User = user;
+            assignment.Status = AssignmentStatus.InProgress;
+            _unitOfWork.Commit();
         }
 
         public IEnumerable<AssignmentDTO> GetAssignmentsFromEvent(string eventId)
         {
             return _mapper.Map<IEnumerable<AssignmentDTO>>(
-                _unitOfWork.Assignments.GetAll(a => a.EventId == eventId));
+                _unitOfWork.Assignments.GetAll(a => a.EventId == eventId).ToList());
         }
 
         public IEnumerable<AssignmentDTO> GetAssignmentsForRole(string roleId)
@@ -52,7 +68,22 @@ namespace OrgControlServer.BLL.Services
             var role = _unitOfWork.Roles.GetById(roleId);
 
             return _mapper.Map<IEnumerable<AssignmentDTO>>(
-                role.AllowedAssignments.Where(a => a.Status == AssignmentStatus.NotStarted));
+                role.AllowedAssignments.Where(a => a.Status == AssignmentStatus.NotStarted).ToList());
+        }
+
+        public IEnumerable<AssignmentDTO> GetAssignmentsForUserInEvent(string userId, string eventId)
+        {
+            var userRolesInEvent = _unitOfWork.Roles.GetAll(r => r.EventId == eventId);
+
+            return _mapper.Map<IEnumerable<AssignmentDTO>>(userRolesInEvent
+                .SelectMany(r => r.AllowedAssignments.Where(a => a.Status == AssignmentStatus.NotStarted)).ToList());
+        }
+
+        public IEnumerable<AssignmentDTO> GetDutiesForUserInEvent(string userId, string eventId)
+        {
+            var user = _unitOfWork.Users.GetById(userId);
+
+            return _mapper.Map<IEnumerable<AssignmentDTO>>(user.Duties.Where(a => a.EventId == eventId));
         }
     }
 }

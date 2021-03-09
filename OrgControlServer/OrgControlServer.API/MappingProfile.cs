@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using OrgControlServer.API.ViewModels.Assignments;
 using OrgControlServer.API.ViewModels.Auth;
 using OrgControlServer.API.ViewModels.Events;
 using OrgControlServer.API.ViewModels.Roles;
@@ -33,8 +34,10 @@ namespace OrgControlServer.API
             CreateMap<RoleCreateViewModel, RoleCreateDTO>();
             CreateMap<RoleCreateDTO, Role>();
 
+            CreateMap<AssignmentCreateViewModel, AssignmentCreateDTO>();
             CreateMap<AssignmentCreateDTO, Assignment>();
             CreateMap<Assignment, AssignmentDTO>();
+            CreateMap<AssignmentDTO, AssignmentViewModel>();
         }
     }
 }

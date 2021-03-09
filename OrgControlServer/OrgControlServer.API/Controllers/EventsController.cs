@@ -35,25 +35,25 @@ namespace OrgControlServer.API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var userId = User.Claims.FirstOrDefault(c => c.Type.Equals(ClaimTypes.NameIdentifier))?.Value;
+            var currentUserId = User.Claims.FirstOrDefault(c => c.Type.Equals(ClaimTypes.NameIdentifier))?.Value;
 
-            return _mapper.Map<EventViewModel>(_eventService.CreateEvent(model.Name, userId));
+            return _mapper.Map<EventViewModel>(_eventService.CreateEvent(model.Name, currentUserId));
         }
 
         [HttpGet]
         public ActionResult<IEnumerable<EventViewModel>> GetOwnEvents()
         {
-            var userId = User.Claims.FirstOrDefault(c => c.Type.Equals(ClaimTypes.NameIdentifier))?.Value;
+            var currentUserId = User.Claims.FirstOrDefault(c => c.Type.Equals(ClaimTypes.NameIdentifier))?.Value;
 
-            return Ok(_mapper.Map<IEnumerable<EventViewModel>>(_eventService.GetEventsFromUser(userId)));
+            return Ok(_mapper.Map<IEnumerable<EventViewModel>>(_eventService.GetEventsFromUser(currentUserId)));
         }
 
-        [HttpDelete("Delete/{id}")]
-        public ActionResult Delete([FromRoute] string id)
+        [HttpDelete("Delete/{eventId}")]
+        public ActionResult Delete([FromRoute] string eventId)
         {
-            var userId = User.Claims.FirstOrDefault(c => c.Type.Equals(ClaimTypes.NameIdentifier))?.Value;
+            var currentUserId = User.Claims.FirstOrDefault(c => c.Type.Equals(ClaimTypes.NameIdentifier))?.Value;
             
-            _eventService.DeleteEvent(id, userId);
+            _eventService.DeleteEvent(eventId, currentUserId);
 
             return Ok();
         }
