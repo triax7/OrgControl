@@ -3,12 +3,13 @@ using System.Linq;
 using System.Net;
 using OrgControlServer.BLL.DTOs.Auth;
 using OrgControlServer.BLL.Exceptions;
+using OrgControlServer.BLL.Services.Interfaces;
 using OrgControlServer.DAL.Models;
 using OrgControlServer.DAL.Repositories;
 
-namespace OrgControlServer.BLL.Services
+namespace OrgControlServer.BLL.Services.Implementations
 {
-    public class UserAccountsService
+    public class UserAccountsService : IUserAccountsService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly TokenService _tokenService;

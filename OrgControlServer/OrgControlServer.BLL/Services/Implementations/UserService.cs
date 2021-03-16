@@ -2,11 +2,12 @@
 using System.Linq;
 using AutoMapper;
 using OrgControlServer.BLL.DTOs.Auth;
+using OrgControlServer.BLL.Services.Interfaces;
 using OrgControlServer.DAL.Repositories;
 
-namespace OrgControlServer.BLL.Services
+namespace OrgControlServer.BLL.Services.Implementations
 {
-    public class UserService
+    public class UserService : IUserService
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;

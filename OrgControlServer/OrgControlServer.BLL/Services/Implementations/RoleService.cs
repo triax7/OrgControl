@@ -4,12 +4,13 @@ using System.Net;
 using AutoMapper;
 using OrgControlServer.BLL.DTOs.Roles;
 using OrgControlServer.BLL.Exceptions;
+using OrgControlServer.BLL.Services.Interfaces;
 using OrgControlServer.DAL.Models;
 using OrgControlServer.DAL.Repositories;
 
-namespace OrgControlServer.BLL.Services
+namespace OrgControlServer.BLL.Services.Implementations
 {
-    public class RoleService
+    public class RoleService : IRoleService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;

@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using AutoMapper;
 using OrgControlServer.BLL.DTOs.Assignments;
 using OrgControlServer.BLL.Exceptions;
+using OrgControlServer.BLL.Services.Interfaces;
 using OrgControlServer.DAL.Models;
 using OrgControlServer.DAL.Repositories;
 
-namespace OrgControlServer.BLL.Services
+namespace OrgControlServer.BLL.Services.Implementations
 {
-    public class AssignmentService
+    public class AssignmentService : IAssignmentService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;

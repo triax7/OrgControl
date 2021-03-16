@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using OrgControlServer.API.ViewModels.Auth;
 using OrgControlServer.BLL.DTOs.Auth;
 using OrgControlServer.BLL.Services;
+using OrgControlServer.BLL.Services.Interfaces;
 
 namespace OrgControlServer.API.Controllers
 {
@@ -18,9 +19,9 @@ namespace OrgControlServer.API.Controllers
     public class AccountsController : ControllerBase
     {
         private readonly IMapper _mapper;
-        private readonly UserAccountsService _userAccountsService;
+        private readonly IUserAccountsService _userAccountsService;
 
-        public AccountsController(IMapper mapper, UserAccountsService userAccountsService)
+        public AccountsController(IMapper mapper, IUserAccountsService userAccountsService)
         {
             _mapper = mapper;
             _userAccountsService = userAccountsService;

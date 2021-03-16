@@ -5,11 +5,12 @@ using System.Security.Cryptography;
 using System.Text;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using OrgControlServer.BLL.Services.Interfaces;
 using OrgControlServer.DAL.Models;
 
-namespace OrgControlServer.BLL.Services
+namespace OrgControlServer.BLL.Services.Implementations
 {
-    public class TokenService
+    public class TokenService : ITokenService
     {
         private readonly JwtOptions _jwtOptions;
 

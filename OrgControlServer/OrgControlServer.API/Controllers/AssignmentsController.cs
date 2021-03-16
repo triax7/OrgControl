@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using OrgControlServer.API.ViewModels.Assignments;
 using OrgControlServer.BLL.DTOs.Assignments;
 using OrgControlServer.BLL.Services;
+using OrgControlServer.BLL.Services.Interfaces;
 
 namespace OrgControlServer.API.Controllers
 {
@@ -19,9 +20,9 @@ namespace OrgControlServer.API.Controllers
     public class AssignmentsController : ControllerBase
     {
         private readonly IMapper _mapper;
-        private readonly AssignmentService _assignmentService;
+        private readonly IAssignmentService _assignmentService;
 
-        public AssignmentsController(IMapper mapper, AssignmentService assignmentService)
+        public AssignmentsController(IMapper mapper, IAssignmentService assignmentService)
         {
             _mapper = mapper;
             _assignmentService = assignmentService;

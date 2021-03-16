@@ -8,6 +8,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using OrgControlServer.API.ViewModels.Auth;
 using OrgControlServer.BLL.Services;
+using OrgControlServer.BLL.Services.Interfaces;
 
 namespace OrgControlServer.API.Controllers
 {
@@ -17,9 +18,9 @@ namespace OrgControlServer.API.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IMapper _mapper;
-        private readonly UserService _userService;
+        private readonly IUserService _userService;
 
-        public UsersController(IMapper mapper, UserService userService)
+        public UsersController(IMapper mapper, IUserService userService)
         {
             _mapper = mapper;
             _userService = userService;

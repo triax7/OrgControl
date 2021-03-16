@@ -11,6 +11,8 @@ using Microsoft.Extensions.Logging;
 using OrgControlServer.API.ViewModels.Roles;
 using OrgControlServer.BLL.DTOs.Roles;
 using OrgControlServer.BLL.Services;
+using OrgControlServer.BLL.Services.Implementations;
+using OrgControlServer.BLL.Services.Interfaces;
 
 namespace OrgControlServer.API.Controllers
 {
@@ -19,13 +21,11 @@ namespace OrgControlServer.API.Controllers
     [ApiController]
     public class RolesController : ControllerBase
     {
-        private readonly UserAccountsService _userAccountsService;
-        private readonly RoleService _roleService;
+        private readonly IRoleService _roleService;
         private readonly IMapper _mapper;
 
-        public RolesController(UserAccountsService userAccountsService, RoleService roleService, IMapper mapper)
+        public RolesController(RoleService roleService, IMapper mapper)
         {
-            _userAccountsService = userAccountsService;
             _roleService = roleService;
             _mapper = mapper;
         }

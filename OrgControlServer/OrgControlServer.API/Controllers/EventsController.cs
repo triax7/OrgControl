@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using OrgControlServer.API.ViewModels.Events;
 using OrgControlServer.BLL.DTOs.Events;
 using OrgControlServer.BLL.Services;
+using OrgControlServer.BLL.Services.Interfaces;
 
 namespace OrgControlServer.API.Controllers
 {
@@ -18,13 +19,11 @@ namespace OrgControlServer.API.Controllers
     [ApiController]
     public class EventsController : ControllerBase
     {
-        private readonly UserAccountsService _userAccountsService;
-        private readonly EventService _eventService;
+        private readonly IEventService _eventService;
         private readonly IMapper _mapper;
 
-        public EventsController(UserAccountsService userAccountsService, EventService eventService, IMapper mapper)
+        public EventsController(IEventService eventService, IMapper mapper)
         {
-            _userAccountsService = userAccountsService;
             _eventService = eventService;
             _mapper = mapper;
         }

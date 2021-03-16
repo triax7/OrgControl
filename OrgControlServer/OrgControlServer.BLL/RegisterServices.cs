@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using OrgControlServer.BLL.Services;
+using OrgControlServer.BLL.Services.Implementations;
+using OrgControlServer.BLL.Services.Interfaces;
 
 namespace OrgControlServer.BLL
 {
@@ -12,12 +14,12 @@ namespace OrgControlServer.BLL
     {
         public static IServiceCollection AddBLLServices(this IServiceCollection services)
         {
-            services.AddTransient<UserAccountsService>();
-            services.AddTransient<TokenService>();
-            services.AddTransient<EventService>();
-            services.AddTransient<RoleService>();
-            services.AddTransient<UserService>();
-            services.AddTransient<AssignmentService>();
+            services.AddTransient<IUserAccountsService, UserAccountsService>();
+            services.AddTransient<ITokenService, TokenService>();
+            services.AddTransient<IEventService, EventService>();
+            services.AddTransient<IRoleService, RoleService>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IAssignmentService, AssignmentService>();
 
             return services;
         }
