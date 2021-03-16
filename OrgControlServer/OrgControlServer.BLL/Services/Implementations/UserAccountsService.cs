@@ -12,9 +12,9 @@ namespace OrgControlServer.BLL.Services.Implementations
     public class UserAccountsService : IUserAccountsService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly TokenService _tokenService;
+        private readonly ITokenService _tokenService;
 
-        public UserAccountsService(IUnitOfWork unitOfWork, TokenService tokenService)
+        public UserAccountsService(IUnitOfWork unitOfWork, ITokenService tokenService)
         {
             _unitOfWork = unitOfWork;
             _tokenService = tokenService;
