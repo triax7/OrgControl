@@ -71,7 +71,7 @@ namespace OrgControlServer.BLL.Services.Implementations
 
         public IEnumerable<AssignmentDTO> GetAssignmentsForUserInEvent(string userId, string eventId)
         {
-            var userRolesInEvent = _unitOfWork.Roles.GetAll(r => r.EventId == eventId);
+            var userRolesInEvent = _unitOfWork.Roles.GetAll(r => r.EventId == eventId && r.Users.Any(u => u.Id == userId));
 
             return _mapper.Map<IEnumerable<AssignmentDTO>>(userRolesInEvent
                 .SelectMany(r => r.AllowedAssignments.Where(a => a.Status == AssignmentStatus.NotStarted)).ToList());

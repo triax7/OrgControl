@@ -54,6 +54,7 @@ namespace OrgControlServer.BLL.Services.Implementations
                 throw new AppException("Role does not belong to you or does not exist", HttpStatusCode.Forbidden);
             
             _unitOfWork.Roles.Remove(role);
+            _unitOfWork.Commit();
         }
 
         public void AssignRoleToUser(string roleId, string userToAssignId, string currentUserId)
