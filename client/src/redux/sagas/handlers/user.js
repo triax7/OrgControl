@@ -1,7 +1,7 @@
-import {current, login, logout, register} from '../../../api/Accounts';
-import {call, put} from '@redux-saga/core/effects';
-import {setUser} from '../../slices/userSlice';
-import {push} from 'connected-react-router';
+import { current, login, logout, register } from '../../../api/Accounts';
+import { call, put } from '@redux-saga/core/effects';
+import { setUser } from '../../slices/userSlice';
+import { push } from 'connected-react-router';
 
 
 export function* handleGetCurrentUser(action) {
@@ -11,7 +11,7 @@ export function* handleGetCurrentUser(action) {
     yield put(setUser({...data}));
   } catch (error) {
     console.log(error);
-    yield put(push('/login'))
+    yield put(push('/login'));
   }
 }
 

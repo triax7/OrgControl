@@ -1,7 +1,7 @@
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import React from 'react';
-import {getCurrentUser} from '../redux/slices/userSlice';
+import { getCurrentUser } from '../redux/slices/userSlice';
 
 export default function UserDisplay() {
   const dispatch = useDispatch();

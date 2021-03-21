@@ -1,6 +1,11 @@
-import {takeLatest} from '@redux-saga/core/effects';
-import {handleGetCurrentUser, handleLoginUser, handleLogout, handleRegisterUser} from './handlers/user';
-import {getCurrentUser, registerUser, loginUser, logoutUser} from '../slices/userSlice';
+import { takeLatest } from '@redux-saga/core/effects';
+import {
+  handleGetCurrentUser,
+  handleLoginUser,
+  handleLogout,
+  handleRegisterUser
+} from './handlers/user';
+import { getCurrentUser, registerUser, loginUser, logoutUser } from '../slices/userSlice';
 
 export function* watcherSaga() {
   yield takeLatest(getCurrentUser.type, handleGetCurrentUser);

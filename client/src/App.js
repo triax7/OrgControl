@@ -1,8 +1,8 @@
 import './App.css';
 import React from 'react';
-import {ConnectedRouter} from 'connected-react-router';
-import {Route, Switch} from 'react-router';
-import {history} from './redux/configureStore';
+import { ConnectedRouter } from 'connected-react-router';
+import { Route, Switch } from 'react-router';
+import { history } from './redux/configureStore';
 import UserDisplay from './components/TestDisplayUser';
 import RegistrationForm from './components/RegistrationForm';
 import LoginForm from './components/LoginForm';

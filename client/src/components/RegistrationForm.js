@@ -3,11 +3,11 @@ import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import {useDispatch} from 'react-redux';
-import {Field, Form, Formik} from 'formik';
-import {TextField} from 'formik-material-ui';
-import {registerUser} from '../redux/slices/userSlice';
-import {emailExists} from '../api/Accounts';
+import { useDispatch } from 'react-redux';
+import { Field, Form, Formik } from 'formik';
+import { TextField } from 'formik-material-ui';
+import { registerUser } from '../redux/slices/userSlice';
+import { emailExists } from '../api/Accounts';
 
 export default function RegistrationForm() {
   const dispatch = useDispatch();

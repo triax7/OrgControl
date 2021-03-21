@@ -2,10 +2,10 @@ import AppBar from '@material-ui/core/AppBar';
 import Box from '@material-ui/core/Box';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Button from '@material-ui/core/Button';
-import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {push} from 'connected-react-router';
-import {getCurrentUser, logoutUser} from '../redux/slices/userSlice';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { push } from 'connected-react-router';
+import { getCurrentUser, logoutUser } from '../redux/slices/userSlice';
 
 export default function Header() {
   const dispatch = useDispatch();

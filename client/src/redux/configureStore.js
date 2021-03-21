@@ -1,9 +1,9 @@
 import createSagaMiddleware from 'redux-saga';
-import {combineReducers} from 'redux';
-import {connectRouter, routerMiddleware} from 'connected-react-router';
-import {configureStore, getDefaultMiddleware} from '@reduxjs/toolkit';
-import {createBrowserHistory} from 'history';
-import {watcherSaga} from './sagas/rootSaga';
+import { combineReducers } from 'redux';
+import { connectRouter, routerMiddleware } from 'connected-react-router';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import { createBrowserHistory } from 'history';
+import { watcherSaga } from './sagas/rootSaga';
 import userReducer from './slices/userSlice';
 
 const createRootReducer = (browserHistory) => combineReducers({
