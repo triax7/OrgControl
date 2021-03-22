@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Runtime.CompilerServices;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using OrgControlServer.BLL.DTOs.Assignments;
 using OrgControlServer.BLL.Exceptions;
 using OrgControlServer.BLL.Services.Interfaces;
@@ -55,6 +57,28 @@ namespace OrgControlServer.BLL.Services.Implementations
             _unitOfWork.Commit();
         }
 
+        public IEnumerable<DutyDTO> AutoAssignDuties(IEnumerable<string> assignmentIds, string currentUserId)
+        {
+            var assignedDuties = new List<DutyDTO>();
+
+            foreach (var assignmentId in assignmentIds)
+            {
+                var assignment = _unitOfWork.Assignments.GetById(assignmentId);
+
+                var userToAssign = assignment.AllowedRoles
+                    .SelectMany(r => r.Users).Distinct().OrderBy(u => u.Duties.Count).FirstOrDefault();
+
+                assignment.User = userToAssign;
+                assignment.Status = AssignmentStatus.InProgress;
+
+                _unitOfWork.Commit();
+                
+                assignedDuties.Add(_mapper.Map<DutyDTO>(assignment));
+            }
+
+            return assignedDuties;
+        }
+
         public IEnumerable<AssignmentDTO> GetAssignmentsFromEvent(string eventId)
         {
             return _mapper.Map<IEnumerable<AssignmentDTO>>(
@@ -74,7 +98,7 @@ namespace OrgControlServer.BLL.Services.Implementations
             var userRolesInEvent = _unitOfWork.Roles.GetAll(r => r.EventId == eventId && r.Users.Any(u => u.Id == userId));
 
             return _mapper.Map<IEnumerable<AssignmentDTO>>(userRolesInEvent
-                .SelectMany(r => r.AllowedAssignments.Where(a => a.Status == AssignmentStatus.NotStarted)).ToList());
+                .SelectMany(r => r.AllowedAssignments.Where(a => a.Status == AssignmentStatus.NotStarted)).Distinct().ToList());
         }
 
         public IEnumerable<AssignmentDTO> GetDutiesForUserInEvent(string userId, string eventId)

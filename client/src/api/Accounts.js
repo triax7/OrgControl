@@ -7,7 +7,7 @@ axios.interceptors.response.use((response) => {
 }, async function (error) {
   const originalRequest = error.config;
   if (error.response.status === 401 && !originalRequest._retry && originalRequest.url !== 'updateAccessToken') {
-    console.log(originalRequest);
+    //console.log(originalRequest);
     originalRequest._retry = true;
     await updateAccessToken();
     return api(originalRequest);

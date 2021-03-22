@@ -7,6 +7,7 @@ namespace OrgControlServer.BLL.Services.Interfaces
     {
         AssignmentDTO CreateAssignment(AssignmentCreateDTO dto, string currentUserId);
         void AssignDutyToUser(string assignmentId, string userId, string currentUserId);
+        IEnumerable<DutyDTO> AutoAssignDuties(IEnumerable<string> assignmentIds, string currentUserId);
         IEnumerable<AssignmentDTO> GetAssignmentsFromEvent(string eventId);
         IEnumerable<AssignmentDTO> GetAssignmentsForRole(string roleId);
         IEnumerable<AssignmentDTO> GetAssignmentsForUserInEvent(string userId, string eventId);
