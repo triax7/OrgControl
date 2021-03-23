@@ -5,10 +5,12 @@ import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import { createBrowserHistory } from 'history';
 import { watcherSaga } from './sagas/rootSaga';
 import userReducer from './slices/userSlice';
+import eventsReducer from './slices/eventsSlice';
 
 const createRootReducer = (browserHistory) => combineReducers({
   router: connectRouter(browserHistory),
-  user: userReducer
+  user: userReducer,
+  events: eventsReducer
 });
 
 export const history = createBrowserHistory();

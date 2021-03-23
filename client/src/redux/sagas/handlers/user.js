@@ -9,6 +9,7 @@ export function* handleGetCurrentUser(action) {
     const response = yield call(current);
     const {data} = response;
     yield put(setUser({...data}));
+    yield put(push('/events'));
   } catch (error) {
     console.log(error);
     yield put(push('/login'));
@@ -20,7 +21,7 @@ export function* handleRegisterUser(action) {
     const response = yield call(register, action.payload);
     const {data} = response;
     yield put(setUser({...data}));
-    yield put(push('/user'));
+    yield put(push('/events'));
   } catch (error) {
     console.log(error);
   }
@@ -31,7 +32,7 @@ export function* handleLoginUser(action) {
     const response = yield call(login, action.payload);
     const {data} = response;
     yield put(setUser({...data}));
-    yield put(push('/user'));
+    yield put(push('/events'));
   } catch (error) {
     console.log(error);
   }

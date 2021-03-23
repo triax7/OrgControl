@@ -14,7 +14,7 @@ export default function Header() {
 
   useEffect(() => {
     dispatch(getCurrentUser());
-  });
+  }, [dispatch]);
 
   function handleLogout() {
     dispatch(logoutUser());
