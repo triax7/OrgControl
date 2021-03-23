@@ -9,5 +9,8 @@ namespace OrgControlServer.API.ViewModels.Events
     {
         public string Id { get; set; }
         public string Name { get; set; }
+        public int AssignmentsNotStarted { get; set; }
+        public int AssignmentsInProgress { get; set; }
+        public int AssignmentsDone { get; set; }
     }
 }

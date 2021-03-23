@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using AutoMapper;
 using OrgControlServer.BLL.DTOs.Events;
@@ -48,7 +49,17 @@ namespace OrgControlServer.BLL.Services.Implementations
 
         public IEnumerable<EventDTO> GetEventsFromUser(string userId)
         {
-            return _mapper.Map<IEnumerable<EventDTO>>(_unitOfWork.Users.GetById(userId).Events);
+            var events = _mapper.Map<List<EventDTO>>(_unitOfWork.Users.GetById(userId).Events);
+
+            foreach (var e in events)
+            {
+                var assignments = _unitOfWork.Assignments.GetAll(a => a.EventId == e.Id);
+                e.AssignmentsNotStarted = assignments.Count(a => a.Status == AssignmentStatus.NotStarted);
+                e.AssignmentsInProgress = assignments.Count(a => a.Status == AssignmentStatus.InProgress);
+                e.AssignmentsDone = assignments.Count(a => a.Status == AssignmentStatus.Done);
+            }
+
+            return events;
         }
     }
 }
