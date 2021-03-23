@@ -50,6 +50,15 @@ namespace OrgControlServer.API.Controllers
             return Ok();
         }
 
+        [HttpPost("AutoAssignDuties")]
+        public ActionResult AutoAssignDuties([FromBody] AutoAssignViewModel model)
+        {
+            var currentUserId = User.Claims.FirstOrDefault(c => c.Type.Equals(ClaimTypes.NameIdentifier))?.Value;
+
+            return Ok(_mapper.Map<IEnumerable<DutyViewModel>>(
+                _assignmentService.AutoAssignDuties(model.AssignmentIds, currentUserId)));
+        }
+
         [HttpGet("GetFromEvent/{eventId}")]
         public ActionResult<IEnumerable<AssignmentViewModel>> GetAssignmentsFromEvent([FromRoute] string eventId)
         {

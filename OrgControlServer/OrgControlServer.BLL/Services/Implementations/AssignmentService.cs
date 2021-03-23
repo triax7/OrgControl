@@ -65,6 +65,8 @@ namespace OrgControlServer.BLL.Services.Implementations
             {
                 var assignment = _unitOfWork.Assignments.GetById(assignmentId);
 
+                if (assignment.Status != AssignmentStatus.NotStarted) continue;
+
                 var userToAssign = assignment.AllowedRoles
                     .SelectMany(r => r.Users).Distinct().OrderBy(u => u.Duties.Count).FirstOrDefault();
 

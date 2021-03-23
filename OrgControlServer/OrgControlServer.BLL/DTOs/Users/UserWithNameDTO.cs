@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OrgControlServer.BLL.DTOs.Users
 {
-    public class PublicUserDTO
+    public class UserWithNameDTO
     {
         public string Id { get; set; }
         public string Name { get; set; }

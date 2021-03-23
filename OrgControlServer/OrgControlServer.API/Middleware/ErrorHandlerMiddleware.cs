@@ -36,15 +36,14 @@ namespace OrgControlServer.API.Middleware
                         // custom application error
                         response.StatusCode = (int)e.StatusCode;
                         logger.LogWarning($"AppException: {error?.Message}");
+                        var result = JsonSerializer.Serialize(new { errorMessage = error?.Message });
+                        await response.WriteAsync(result);
                         break;
                     default:
                         // unhandled error
                         response.StatusCode = (int)HttpStatusCode.InternalServerError;
                         break;
                 }
-
-                var result = JsonSerializer.Serialize(new { errorMessage = error?.Message });
-                await response.WriteAsync(result);
             }
         }
     }

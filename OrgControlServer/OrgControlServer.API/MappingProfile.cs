@@ -9,6 +9,7 @@ using OrgControlServer.API.ViewModels.Assignments;
 using OrgControlServer.API.ViewModels.Auth;
 using OrgControlServer.API.ViewModels.Events;
 using OrgControlServer.API.ViewModels.Roles;
+using OrgControlServer.API.ViewModels.Users;
 using OrgControlServer.BLL.DTOs.Assignments;
 using OrgControlServer.BLL.DTOs.Auth;
 using OrgControlServer.BLL.DTOs.Events;
@@ -40,8 +41,10 @@ namespace OrgControlServer.API
             CreateMap<Assignment, AssignmentDTO>();
             CreateMap<Assignment, DutyDTO>();
             CreateMap<AssignmentDTO, AssignmentViewModel>();
+            CreateMap<DutyDTO, DutyViewModel>();
 
-            CreateMap<User, PublicUserDTO>();
+            CreateMap<User, UserWithNameDTO>();
+            CreateMap<UserWithNameDTO, UserWithNameViewModel>();
         }
     }
 }

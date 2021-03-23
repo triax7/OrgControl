@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using OrgControlServer.BLL.DTOs.Users;
-using OrgControlServer.DAL.Models;
+using OrgControlServer.API.ViewModels.Users;
 
-namespace OrgControlServer.BLL.DTOs.Assignments
+namespace OrgControlServer.API.ViewModels.Assignments
 {
-    public class DutyDTO
+    public class DutyViewModel
     {
         public string Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public UserWithNameDTO User { get; set; }
+        public UserWithNameViewModel User { get; set; }
     }
 }
