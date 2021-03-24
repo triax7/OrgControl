@@ -13,7 +13,6 @@ export default function LoginForm() {
 
   async function validate(values) {
     let errors = {};
-
     if (!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(values.email)) {
       errors.email = 'Invalid e-mail';
     }

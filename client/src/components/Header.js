@@ -6,6 +6,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
 import { getCurrentUser, logoutUser } from '../redux/slices/userSlice';
+import { colors } from '../theme/colors';
 
 export default function Header() {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ export default function Header() {
 
   return (
     <Box mb={4}>
-      <AppBar position={'sticky'} style={{backgroundColor: '#9dc89a'}}>
+      <AppBar position={'sticky'} style={{backgroundColor: colors.header.main}}>
         <Box display={'flex'} justifyContent={'center'} alignItems={'center'}>
           {isLoggedIn ?
             <Box p={1}>
