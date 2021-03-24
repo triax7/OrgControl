@@ -6,20 +6,26 @@ const eventsSlice = createSlice({
   reducers: {
     getEvents() {
     },
-    setEvent(state, action) {
+    updateOrAddEvent(state, action) {
       const event = action.payload;
       const index = state.findIndex(e => e.id === event.id)
-      state[index] = {...state[index], ...event};
+      if(index !== -1)
+        state[index] = {...state[index], ...event};
+      else
+        state.push(event)
     },
     setEvents(state, action) {
       return action.payload;
+    },
+    createEvent(state, action) {
     }
   }
 });
 
 export const {
   getEvents,
-  setEvent,
-  setEvents
+  updateOrAddEvent,
+  setEvents,
+  createEvent
 } = eventsSlice.actions;
 export default eventsSlice.reducer;

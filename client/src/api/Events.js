@@ -6,6 +6,10 @@ const api = axios.create({
   withCredentials: true
 });
 
-export default function getOwnEvents() {
+export async function getOwnEvents() {
   return api.get('')
+}
+
+export async function create(event) {
+  return api.post('create', event)
 }

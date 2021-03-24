@@ -25,20 +25,20 @@ export default function Header() {
     <Box mb={4}>
       <AppBar position={'sticky'} style={{backgroundColor: colors.header.main}}>
         <Box display={'flex'} justifyContent={'center'} alignItems={'center'}>
-          {isLoggedIn ?
-            <Box p={1}>
-              <ButtonGroup>
+          <Box p={1}>
+            {isLoggedIn ?
+              <ButtonGroup size={'large'}>
                 <Button onClick={() => dispatch(push('/events'))}>Events</Button>
                 <Button onClick={() => dispatch(push('/assignments'))}>Assignments</Button>
                 <Button onClick={handleLogout}>Logout</Button>
               </ButtonGroup>
-            </Box> :
-            <Box p={1}>
-              <ButtonGroup>
+              :
+              <ButtonGroup size={'large'}>
                 <Button onClick={() => dispatch(push('/register'))}>Register</Button>
                 <Button onClick={() => dispatch(push('/login'))}>Login</Button>
               </ButtonGroup>
-            </Box>}
+            }
+          </Box>
         </Box>
       </AppBar>
     </Box>

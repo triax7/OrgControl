@@ -7,7 +7,7 @@ import UserDisplay from './components/TestDisplayUser';
 import RegistrationForm from './components/RegistrationForm';
 import LoginForm from './components/LoginForm';
 import Header from './components/Header';
-import EventsList from './components/EventsList';
+import EventsList from './components/Events/EventsList';
 
 function App() {
   return (

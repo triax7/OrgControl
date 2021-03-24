@@ -1,4 +1,4 @@
-import { takeLatest } from '@redux-saga/core/effects';
+import { takeEvery, takeLatest } from '@redux-saga/core/effects';
 import {
   handleGetCurrentUser,
   handleLoginUser,
@@ -6,8 +6,8 @@ import {
   handleRegisterUser
 } from './handlers/user';
 import { getCurrentUser, registerUser, loginUser, logoutUser } from '../slices/userSlice';
-import { getEvents } from '../slices/eventsSlice';
-import { handleGetEvents } from './handlers/events';
+import { createEvent, getEvents } from '../slices/eventsSlice';
+import { handleCreateEvent, handleGetEvents } from './handlers/events';
 
 export function* watcherSaga() {
   yield takeLatest(getCurrentUser.type, handleGetCurrentUser);
@@ -16,4 +16,5 @@ export function* watcherSaga() {
   yield takeLatest(logoutUser.type, handleLogout);
 
   yield takeLatest(getEvents.type, handleGetEvents);
+  yield takeEvery(createEvent.type, handleCreateEvent);
 }
