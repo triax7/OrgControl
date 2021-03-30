@@ -7,7 +7,8 @@ import UserDisplay from './components/TestDisplayUser';
 import RegistrationForm from './components/RegistrationForm';
 import LoginForm from './components/LoginForm';
 import Header from './components/Header';
-import EventsList from './components/Events/EventsList';
+import EventsList from './components/EventsList/EventsList';
+import EventPage from './components/EventPage/EventPage';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route exact path='/register' component={RegistrationForm}/>
           <Route exact path='/login' component={LoginForm}/>
           <Route exact path='/events' component={EventsList}/>
+          <Route exact path='/events/:id' component={EventPage}/>
           <Route render={() => (<div>No route :(</div>)}/>
         </Switch>
       </>

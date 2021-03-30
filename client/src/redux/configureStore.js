@@ -6,11 +6,13 @@ import { createBrowserHistory } from 'history';
 import { watcherSaga } from './sagas/rootSaga';
 import userReducer from './slices/userSlice';
 import eventsReducer from './slices/eventsSlice';
+import rolesReducer from './slices/rolesSlice';
 
 const createRootReducer = (browserHistory) => combineReducers({
   router: connectRouter(browserHistory),
   user: userReducer,
-  events: eventsReducer
+  events: eventsReducer,
+  roles: rolesReducer
 });
 
 export const history = createBrowserHistory();

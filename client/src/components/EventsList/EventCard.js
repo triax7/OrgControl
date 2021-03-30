@@ -6,10 +6,14 @@ import Divider from '@material-ui/core/Divider';
 import ColorTypography from '../util/ColorTypography';
 import { colors } from '../../theme/colors';
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { push } from 'connected-react-router';
 
 export default function EventCard({event}) {
+  const dispatch = useDispatch();
+
   function handleClick() {
-    console.log(event);
+    dispatch(push(`/events/${event.id}`));
   }
 
   return (

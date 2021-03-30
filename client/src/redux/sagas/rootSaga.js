@@ -8,6 +8,8 @@ import {
 import { getCurrentUser, registerUser, loginUser, logoutUser } from '../slices/userSlice';
 import { createEvent, getEvents } from '../slices/eventsSlice';
 import { handleCreateEvent, handleGetEvents } from './handlers/events';
+import { createRole, deleteRole, getRoles } from '../slices/rolesSlice';
+import { handleCreateRole, handleDeleteRole, handleGetRoles } from './handlers/roles';
 
 export function* watcherSaga() {
   yield takeLatest(getCurrentUser.type, handleGetCurrentUser);
@@ -17,4 +19,8 @@ export function* watcherSaga() {
 
   yield takeLatest(getEvents.type, handleGetEvents);
   yield takeEvery(createEvent.type, handleCreateEvent);
+
+  yield takeLatest(getRoles.type, handleGetRoles);
+  yield takeEvery(createRole.type, handleCreateRole);
+  yield takeEvery(deleteRole.type, handleDeleteRole);
 }
