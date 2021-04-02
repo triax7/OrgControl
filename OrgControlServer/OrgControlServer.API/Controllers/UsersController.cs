@@ -26,8 +26,8 @@ namespace OrgControlServer.API.Controllers
             _userService = userService;
         }
 
-        [HttpGet("search/{searchString}/{page}")]
-        public ActionResult<IEnumerable<UserViewModel>> SearchUsers([FromRoute] string searchString, [FromRoute] int page)
+        [HttpGet("search")]
+        public ActionResult<IEnumerable<UserViewModel>> SearchUsers([FromQuery] string searchString, [FromQuery] int page)
         {
             return Ok(_mapper.Map<IEnumerable<UserViewModel>>(_userService.SearchUsers(searchString, page)));
         }

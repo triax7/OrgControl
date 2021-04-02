@@ -1,16 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { IconButton, Typography } from '@material-ui/core';
-import { Add, Close } from '@material-ui/icons';
+import { Close } from '@material-ui/icons';
 import Box from '@material-ui/core/Box';
-import { deleteRole, getRoles } from '../../redux/slices/rolesSlice';
+import { createRole, deleteRole, getRoles } from '../../redux/slices/rolesSlice';
 import Paper from '@material-ui/core/Paper';
-import RoleCreateForm from './RoleCreateForm';
+import SingleFieldAddForm from '../util/SingleFieldAddForm';
 
 export default function RoleManager({eventId}) {
   const dispatch = useDispatch();
-
-  const [creatingRole, setCreatingRole] = useState(false);
 
   const roles = useSelector(state => [...state.roles].sort((a, b) => a.name > b.name ? 1 : -1));
 
@@ -26,7 +24,7 @@ export default function RoleManager({eventId}) {
     <Paper variant={'outlined'}>
       <Box p={1} pt={2}>
         <Box display={'flex'} justifyContent={'center'}>
-          <Typography variant={'h5'}>Roles</Typography>
+          <Typography variant={'h5'}>Roles in event</Typography>
         </Box>
         <Box p={1} pl={3} pr={3}>
           {roles.map(r =>
@@ -41,18 +39,10 @@ export default function RoleManager({eventId}) {
             </Box>
           )}
         </Box>
-        {!creatingRole
-          ?
-          <Box display={'flex'} justifyContent={'center'}>
-            <IconButton onClick={() => setCreatingRole(true)}>
-              <Add fontSize={'large'}/>
-            </IconButton>
-          </Box>
-          :
-          <Box mt={1}>
-            <RoleCreateForm setCreatingRole={setCreatingRole} eventId={eventId}/>
-          </Box>
-        }
+        <Box p={1}>
+          <SingleFieldAddForm onSubmit={(name) => dispatch(createRole({eventId, name}))}
+                              placeholder={'Role Name'}/>
+        </Box>
       </Box>
     </Paper>
   );

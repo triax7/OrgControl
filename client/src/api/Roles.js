@@ -7,13 +7,21 @@ const api = axios.create({
 });
 
 export async function getFromEvent(eventId) {
-  return api.get(`getFromEvent/${eventId}`)
+  return api.get(`getFromEvent/${eventId}`);
 }
 
 export async function create(role) {
-  return api.post('create', role)
+  return api.post('create', role);
 }
 
 export async function remove(roleId) {
-  return api.delete(`delete/${roleId}`)
+  return api.delete(`delete/${roleId}`);
+}
+
+export async function getFromUserInEvent(userId, eventId) {
+  return api.get(`getFromUserInEvent/${userId}/${eventId}`);
+}
+
+export async function assignRoleToUser(userId, roleId) {
+  return api.post('assign', {userId, roleId});
 }

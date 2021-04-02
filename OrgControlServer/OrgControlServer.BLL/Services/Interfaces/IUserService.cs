@@ -5,6 +5,6 @@ namespace OrgControlServer.BLL.Services.Interfaces
 {
     public interface IUserService
     {
-        IEnumerable<UserDTO> SearchUsers(string searchString, int page, int pageSize = 20);
+        IEnumerable<UserDTO> SearchUsers(string searchString, int page = 1, int pageSize = 10);
     }
 }

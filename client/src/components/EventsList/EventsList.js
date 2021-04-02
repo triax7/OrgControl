@@ -1,16 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux';
-import React, { useEffect, useState } from 'react';
-import { getEvents } from '../../redux/slices/eventsSlice';
-import { Grid, IconButton } from '@material-ui/core';
+import React, { useEffect } from 'react';
+import { createEvent, getEvents } from '../../redux/slices/eventsSlice';
+import { Grid } from '@material-ui/core';
 import EventCard from './EventCard';
-import { Add } from '@material-ui/icons';
 import Box from '@material-ui/core/Box';
-import EventCreateForm from './EventCreateForm';
+import SingleFieldAddForm from '../util/SingleFieldAddForm';
 
 export default function EventList() {
   const dispatch = useDispatch();
 
-  const [creatingEvent, setCreatingEvent] = useState(false);
 
   const events = useSelector(state => [...state.events].sort((a, b) => a.name > b.name ? 1 : -1));
 
@@ -26,18 +24,8 @@ export default function EventList() {
             <EventCard event={e}/>
           </Box>
         )}
-        {!creatingEvent
-          ?
-          <Box display={'flex'} justifyContent={'center'}>
-            <IconButton onClick={() => setCreatingEvent(true)}>
-              <Add fontSize={'large'}/>
-            </IconButton>
-          </Box>
-          :
-          <Box mt={1}>
-            <EventCreateForm setCreatingEvent={setCreatingEvent}/>
-          </Box>
-        }
+        <SingleFieldAddForm onSubmit={(name) => dispatch(createEvent({name}))}
+                            placeholder={'Event Name'}/>
       </Grid>
     </Grid>
   );
