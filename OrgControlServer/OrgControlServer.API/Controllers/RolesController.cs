@@ -69,11 +69,21 @@ namespace OrgControlServer.API.Controllers
         }
 
         [HttpPost("Assign")]
-        public ActionResult AssignRoleToUser([FromBody] AssignRoleToUserViewModel model)
+        public ActionResult AssignRoleToUser([FromBody] AssignOrRemoveRoleViewModel model)
         {
             var currentUserId = User.Claims.FirstOrDefault(c => c.Type.Equals(ClaimTypes.NameIdentifier))?.Value;
 
             _roleService.AssignRoleToUser(model.RoleId, model.UserId, currentUserId);
+
+            return Ok();
+        }
+
+        [HttpPost("RemoveFromUser")]
+        public ActionResult RemoveRoleFromUser([FromBody] AssignOrRemoveRoleViewModel model)
+        {
+            var currentUserId = User.Claims.FirstOrDefault(c => c.Type.Equals(ClaimTypes.NameIdentifier))?.Value;
+
+            _roleService.RemoveRoleFromUser(model.RoleId, model.UserId, currentUserId);
 
             return Ok();
         }

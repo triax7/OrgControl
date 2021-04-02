@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using AutoMapper;
@@ -63,8 +64,22 @@ namespace OrgControlServer.BLL.Services.Implementations
 
             if (role == null || role.Event.UserId != currentUserId)
                 throw new AppException("Role does not belong to you or does not exist", HttpStatusCode.Forbidden);
-            
+
             role.Users.Add(_unitOfWork.Users.GetById(currentUserId));
+            _unitOfWork.Commit();
+        }
+
+        public void RemoveRoleFromUser(string roleId, string userToRemoveId, string currentUserId)
+        {
+            var role = _unitOfWork.Roles.GetById(roleId);
+            var user = _unitOfWork.Users.GetById(userToRemoveId);
+
+            if (user == null)
+                throw new AppException("User not found");
+            if (role == null || role.Event.UserId != currentUserId)
+                throw new AppException("Role does not belong to you or does not exist", HttpStatusCode.Forbidden);
+
+            user.Roles.Remove(role);
             _unitOfWork.Commit();
         }
 

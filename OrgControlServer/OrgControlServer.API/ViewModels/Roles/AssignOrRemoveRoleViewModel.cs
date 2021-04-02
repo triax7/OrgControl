@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OrgControlServer.API.ViewModels.Roles
 {
-    public class AssignRoleToUserViewModel
+    public class AssignOrRemoveRoleViewModel
     {
         [Required] public string UserId { get; set; }
         [Required] public string RoleId { get; set; }

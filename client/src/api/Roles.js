@@ -25,3 +25,7 @@ export async function getFromUserInEvent(userId, eventId) {
 export async function assignRoleToUser(userId, roleId) {
   return api.post('assign', {userId, roleId});
 }
+
+export async function removeRoleFromUser(userId, roleId) {
+  return api.post('removeFromUser', {userId, roleId});
+}

@@ -2,7 +2,7 @@ import Box from '@material-ui/core/Box';
 import { IconButton, Typography } from '@material-ui/core';
 import { Add, Close, Done } from '@material-ui/icons';
 import React, { useEffect, useState } from 'react';
-import { assignRoleToUser, getFromUserInEvent } from '../../api/Roles';
+import { assignRoleToUser, getFromUserInEvent, removeRoleFromUser } from '../../api/Roles';
 import Paper from '@material-ui/core/Paper';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { useSelector } from 'react-redux';
@@ -25,8 +25,13 @@ export default function UserRoleManager({userId, eventId}) {
     getUserRoles();
   }, [userId, eventId]);
 
-  function handleRemoveRole(roleId) { // TODO: Add removing roles from user
-
+  async function handleRemoveRole(roleId) {
+    try {
+      await removeRoleFromUser(userId, roleId);
+      setUserRoles(userRoles.filter(role => role.id !== roleId));
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   async function handleAssignRole() {
@@ -73,7 +78,7 @@ export default function UserRoleManager({userId, eventId}) {
                 onChange={(event, newValue) => {
                   setSelectedRole(newValue);
                 }}
-                options={roles}
+                options={roles.filter(role => !userRoles.some(uRole => uRole.id === role.id))}
                 getOptionLabel={role => role.name}
                 getOptionSelected={role => role.name}
                 renderInput={(params) => (
