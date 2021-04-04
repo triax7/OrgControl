@@ -7,8 +7,9 @@ import { getEvents } from '../../redux/slices/eventsSlice';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import Link from '@material-ui/core/Link';
 import { push } from 'connected-react-router';
-import RoleManager from './RoleManager';
-import UserManager from './UserManager';
+import RoleManager from './Roles/RoleManager';
+import UserManager from './Users/UserManager';
+import AssignmentManager from './Assignments/AssignmentManager';
 
 export default function EventPage({tab}) {
   const {id} = useParams();
@@ -50,6 +51,7 @@ export default function EventPage({tab}) {
             </Box>
             {tab === 'roles' && <RoleManager eventId={event.id}/>}
             {tab === 'users' && <UserManager eventId={event.id}/>}
+            {tab === 'assignments' && <AssignmentManager eventId={event.id}/>}
           </Grid>
         </Grid>
       }

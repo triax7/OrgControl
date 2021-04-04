@@ -10,6 +10,8 @@ import { createEvent, getEvents } from '../slices/eventsSlice';
 import { handleCreateEvent, handleGetEvents } from './handlers/events';
 import { createRole, deleteRole, getRoles } from '../slices/rolesSlice';
 import { handleCreateRole, handleDeleteRole, handleGetRoles } from './handlers/roles';
+import { createAssignment, getAssignments } from '../slices/assignmentsSlice';
+import { handleCreateAssignment, handleGetAssignments } from './handlers/assignments';
 
 export function* watcherSaga() {
   yield takeLatest(getCurrentUser.type, handleGetCurrentUser);
@@ -23,4 +25,7 @@ export function* watcherSaga() {
   yield takeLatest(getRoles.type, handleGetRoles);
   yield takeEvery(createRole.type, handleCreateRole);
   yield takeEvery(deleteRole.type, handleDeleteRole);
+
+  yield takeLatest(getAssignments.type, handleGetAssignments);
+  yield takeEvery(createAssignment.type, handleCreateAssignment);
 }

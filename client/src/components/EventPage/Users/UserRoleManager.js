@@ -2,14 +2,16 @@ import Box from '@material-ui/core/Box';
 import { IconButton, Typography } from '@material-ui/core';
 import { Add, Close, Done } from '@material-ui/icons';
 import React, { useEffect, useState } from 'react';
-import { assignRoleToUser, getFromUserInEvent, removeRoleFromUser } from '../../api/Roles';
+import { assignRoleToUser, getFromUserInEvent, removeRoleFromUser } from '../../../api/Roles';
 import Paper from '@material-ui/core/Paper';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
+import { getRoles } from '../../../redux/slices/rolesSlice';
 
 export default function UserRoleManager({userId, eventId}) {
 
+  const dispatch = useDispatch();
   const [userRoles, setUserRoles] = useState([]);
   const [addingRole, setAddingRole] = useState(false);
   const [selectedRole, setSelectedRole] = useState(null);
@@ -19,11 +21,12 @@ export default function UserRoleManager({userId, eventId}) {
   useEffect(() => {
     async function getUserRoles() {
       const {data} = await getFromUserInEvent(userId, eventId);
+      if (roles.length === 0) dispatch(getRoles(eventId));
       setUserRoles(data);
     }
 
     getUserRoles();
-  }, [userId, eventId]);
+  }, [userId, eventId, roles, dispatch]);
 
   async function handleRemoveRole(roleId) {
     try {
@@ -35,10 +38,12 @@ export default function UserRoleManager({userId, eventId}) {
   }
 
   async function handleAssignRole() {
+    if(!selectedRole) return;
     try {
       await assignRoleToUser(userId, selectedRole.id);
       setUserRoles(roles => [...roles, selectedRole]);
       setAddingRole(false);
+      setSelectedRole(null);
     } catch (e) {
       console.log(e);
     }

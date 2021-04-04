@@ -1,7 +1,7 @@
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import React, { useEffect, useState } from 'react';
-import { searchUsers } from '../../api/Users';
+import { searchUsers } from '../../../api/Users';
 
 export default function UserSearch({onUserSelected}) {
   const [userList, setUserList] = useState([]);

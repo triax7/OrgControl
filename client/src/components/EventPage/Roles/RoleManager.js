@@ -3,9 +3,9 @@ import React, { useEffect } from 'react';
 import { IconButton, Typography } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
 import Box from '@material-ui/core/Box';
-import { createRole, deleteRole, getRoles } from '../../redux/slices/rolesSlice';
+import { createRole, deleteRole, getRoles } from '../../../redux/slices/rolesSlice';
 import Paper from '@material-ui/core/Paper';
-import SingleFieldAddForm from '../util/SingleFieldAddForm';
+import SingleFieldAddForm from '../../util/SingleFieldAddForm';
 
 export default function RoleManager({eventId}) {
   const dispatch = useDispatch();

@@ -20,7 +20,8 @@ namespace OrgControlServer.BLL.Services.Implementations
 
         public IEnumerable<UserDTO> SearchUsers(string searchString, int page = 1, int pageSize = 10)
         {
-            var result = _unitOfWork.Users.GetAll(u => u.Name.Contains(searchString)).OrderBy(u => u.Name)
+            var result = _unitOfWork.Users.GetAll(u => u.Name.Contains(searchString) || searchString == null)
+                .OrderBy(u => u.Name)
                 .Skip((page - 1) * pageSize).Take(pageSize);
 
             return _mapper.Map<IEnumerable<UserDTO>>(result);

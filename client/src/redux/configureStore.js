@@ -7,12 +7,14 @@ import { watcherSaga } from './sagas/rootSaga';
 import userReducer from './slices/userSlice';
 import eventsReducer from './slices/eventsSlice';
 import rolesReducer from './slices/rolesSlice';
+import assignmentsReducer from './slices/assignmentsSlice'
 
 const createRootReducer = (browserHistory) => combineReducers({
   router: connectRouter(browserHistory),
   user: userReducer,
   events: eventsReducer,
-  roles: rolesReducer
+  roles: rolesReducer,
+  assignments: assignmentsReducer
 });
 
 export const history = createBrowserHistory();
