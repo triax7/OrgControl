@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Runtime.CompilerServices;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using OrgControlServer.BLL.DTOs.Assignments;
 using OrgControlServer.BLL.Exceptions;
 using OrgControlServer.BLL.Services.Interfaces;
@@ -57,9 +55,9 @@ namespace OrgControlServer.BLL.Services.Implementations
             _unitOfWork.Commit();
         }
 
-        public IEnumerable<DutyDTO> AutoAssignDuties(IEnumerable<string> assignmentIds, string currentUserId)
+        public IEnumerable<AssignmentDTO> AutoAssignDuties(IEnumerable<string> assignmentIds, string currentUserId)
         {
-            var assignedDuties = new List<DutyDTO>();
+            var assignedDuties = new List<AssignmentDTO>();
 
             foreach (var assignmentId in assignmentIds)
             {
@@ -70,12 +68,15 @@ namespace OrgControlServer.BLL.Services.Implementations
                 var userToAssign = assignment.AllowedRoles
                     .SelectMany(r => r.Users).Distinct().OrderBy(u => u.Duties.Count).FirstOrDefault();
 
-                assignment.User = userToAssign;
-                assignment.Status = AssignmentStatus.InProgress;
+                if (userToAssign != null)
+                {
+                    assignment.User = userToAssign;
+                    assignment.Status = AssignmentStatus.InProgress;
+                }
 
                 _unitOfWork.Commit();
-                
-                assignedDuties.Add(_mapper.Map<DutyDTO>(assignment));
+
+                assignedDuties.Add(_mapper.Map<AssignmentDTO>(assignment));
             }
 
             return assignedDuties;
@@ -97,10 +98,12 @@ namespace OrgControlServer.BLL.Services.Implementations
 
         public IEnumerable<AssignmentDTO> GetAssignmentsForUserInEvent(string userId, string eventId)
         {
-            var userRolesInEvent = _unitOfWork.Roles.GetAll(r => r.EventId == eventId && r.Users.Any(u => u.Id == userId));
+            var userRolesInEvent =
+                _unitOfWork.Roles.GetAll(r => r.EventId == eventId && r.Users.Any(u => u.Id == userId));
 
             return _mapper.Map<IEnumerable<AssignmentDTO>>(userRolesInEvent
-                .SelectMany(r => r.AllowedAssignments.Where(a => a.Status == AssignmentStatus.NotStarted)).Distinct().ToList());
+                .SelectMany(r => r.AllowedAssignments.Where(a => a.Status == AssignmentStatus.NotStarted)).Distinct()
+                .ToList());
         }
 
         public IEnumerable<AssignmentDTO> GetDutiesForUserInEvent(string userId, string eventId)

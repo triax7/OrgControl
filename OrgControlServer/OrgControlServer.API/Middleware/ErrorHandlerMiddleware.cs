@@ -41,6 +41,7 @@ namespace OrgControlServer.API.Middleware
                         break;
                     default:
                         // unhandled error
+                        logger.LogWarning($"Error: {error?.Message}");
                         response.StatusCode = (int)HttpStatusCode.InternalServerError;
                         break;
                 }

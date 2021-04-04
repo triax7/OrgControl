@@ -39,9 +39,7 @@ namespace OrgControlServer.API
             CreateMap<AssignmentCreateViewModel, AssignmentCreateDTO>();
             CreateMap<AssignmentCreateDTO, Assignment>();
             CreateMap<Assignment, AssignmentDTO>();
-            CreateMap<Assignment, DutyDTO>();
             CreateMap<AssignmentDTO, AssignmentViewModel>();
-            CreateMap<DutyDTO, DutyViewModel>();
 
             CreateMap<User, UserWithNameDTO>();
             CreateMap<UserWithNameDTO, UserWithNameViewModel>();

@@ -17,3 +17,7 @@ export async function create(assignments) {
 export async function getForUserInEvent(userId, eventId) {
   return api.get(`getAssignmentsInEvent/${userId}/${eventId}`);
 }
+
+export async function autoAssignDuties(assignmentIds) {
+  return api.post(`autoAssignDuties`, {assignmentIds});
+}

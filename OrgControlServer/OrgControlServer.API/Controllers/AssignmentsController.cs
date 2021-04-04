@@ -51,11 +51,11 @@ namespace OrgControlServer.API.Controllers
         }
 
         [HttpPost("AutoAssignDuties")]
-        public ActionResult AutoAssignDuties([FromBody] AutoAssignViewModel model)
+        public ActionResult<IEnumerable<AssignmentViewModel>> AutoAssignDuties([FromBody] AutoAssignViewModel model)
         {
             var currentUserId = User.Claims.FirstOrDefault(c => c.Type.Equals(ClaimTypes.NameIdentifier))?.Value;
 
-            return Ok(_mapper.Map<IEnumerable<DutyViewModel>>(
+            return Ok(_mapper.Map<IEnumerable<AssignmentViewModel>>(
                 _assignmentService.AutoAssignDuties(model.AssignmentIds, currentUserId)));
         }
 
