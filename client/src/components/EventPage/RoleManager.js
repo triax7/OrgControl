@@ -24,7 +24,7 @@ export default function RoleManager({eventId}) {
     <Paper variant={'outlined'}>
       <Box p={1} pt={2}>
         <Box display={'flex'} justifyContent={'center'}>
-          <Typography variant={'h5'}>Roles in event</Typography>
+          <Typography variant={'h5'}>Role Management</Typography>
         </Box>
         <Box p={1} pl={3} pr={3}>
           {roles.map(r =>

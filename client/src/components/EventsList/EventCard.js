@@ -13,7 +13,7 @@ export default function EventCard({event}) {
   const dispatch = useDispatch();
 
   function handleClick() {
-    dispatch(push(`/events/${event.id}`));
+    dispatch(push(`/events/${event.id}/assignments`));
   }
 
   return (

@@ -20,7 +20,9 @@ function App() {
           <Route exact path='/register' component={RegistrationForm}/>
           <Route exact path='/login' component={LoginForm}/>
           <Route exact path='/events' component={EventsList}/>
-          <Route exact path='/events/:id' component={EventPage}/>
+          <Route exact path='/events/:id/roles' render={() => <EventPage tab={'roles'}/>}/>
+          <Route exact path='/events/:id/assignments' render={() => <EventPage tab={'assignments'}/>}/>
+          <Route exact path='/events/:id/users' render={() => <EventPage tab={'users'}/>}/>
           <Route render={() => (<div>No route :(</div>)}/>
         </Switch>
       </>
