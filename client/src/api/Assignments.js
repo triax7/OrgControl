@@ -10,8 +10,8 @@ export async function getFromEvent(eventId) {
   return api.get(`getFromEvent/${eventId}`);
 }
 
-export async function create(assignments) {
-  return api.post('create', assignments);
+export async function create(assignment) {
+  return api.post('create', assignment);
 }
 
 export async function getForUserInEvent(userId, eventId) {

@@ -8,6 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import { Button, Typography } from '@material-ui/core';
 import { colors } from '../../../theme/colors';
 import { autoAssignDuties } from '../../../api/Assignments';
+import AssignmentCreateForm from './AssignmentCreateForm';
 
 export default function AssignmentManager({eventId}) {
   const dispatch = useDispatch();
@@ -75,7 +76,7 @@ export default function AssignmentManager({eventId}) {
         </Paper>
       </>
       :
-      <div>form</div>
+      <AssignmentCreateForm eventId={eventId} onSubmit={() => setCreatingAssignment(false)}/>
     }
   </>);
 }
